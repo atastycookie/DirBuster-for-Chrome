@@ -6,5 +6,5 @@
 
 ## Usage
 
-1. Import directory as the chrome extension.
+1. Import `src` directory as the chrome extension.
 2. Open target page, and click "Start DirBusting".
