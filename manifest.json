@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "DirBuster",
+  "version": "1.0",
+  "description": "Google Chrome DirBuster extention",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "host_permissions": [
+    "*://*/*"
+  ],
+  "permissions": [
+    "activeTab",
+    "storage"
+  ]
+}

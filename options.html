@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Options</title>
+  </head>
+  <body>
+    <h1>Options</h1>
+    <form>
+      <label for="paths">Paths to dirbust:</label><br />
+      <textarea id="paths" name="paths" rows="10"></textarea><br />
+      <label for="maxWait">maxWait:</label>
+      <input type="number" id="maxWait" name="maxWait" min="1" max="5000" /><br />
+      <label for="maxWait">useSleep (random from 1 up to 5 sec):</label>
+      <input type="checkbox" id="useSleep" name="useSleep"/><br /><br />
+      <button type="submit">Save</button>
+    </form>
+
+    <script src="options.js"></script>
+  </body>
+</html>
