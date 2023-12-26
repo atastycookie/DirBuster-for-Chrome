@@ -5,20 +5,21 @@ const resultsDiv = document.getElementById('results');
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   const tab = tabs[0];
   const url = new URL(tab.url);
+  const protocol = url.protocol;
   const domain = url.hostname;
 
   checkBtn.addEventListener('click', () => {
     chrome.storage.sync.get(['paths', 'maxWait', 'useSleep'], (result) => {
       const paths = result.paths || [];
       const maxWait = result.maxWait || 5000;
-      const useSleep = result.useSleep || 5000;
+      const useSleep = result.useSleep || true;
 
       const urls = paths.map((path) => `https://${domain}${path}`);
       const requests = urls.map((url) => new XMLHttpRequest());
       
       requests.forEach((request, index) => {
         const path = paths[index];
-        const pageUrl = `https://${domain}${path}`;
+        const pageUrl = `${protocol}//${domain}${path}`;
       
         request.onreadystatechange = function() {
           if (request.readyState === XMLHttpRequest.DONE) {
