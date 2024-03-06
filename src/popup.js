@@ -1,12 +1,17 @@
 const checkBtn = document.getElementById('check-btn');
 const settingsBtn = document.getElementById('settings-btn');
 const resultsDiv = document.getElementById('results');
+const pathToDirbInput = document.getElementById('path-to-dirbust');
 
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   const tab = tabs[0];
   const url = new URL(tab.url);
+
   const protocol = url.protocol;
   const domain = url.hostname;
+
+  const dirbPath = `${protocol}//${domain}`
+  pathToDirbInput.value = dirbPath;
 
   checkBtn.addEventListener('click', () => {
     chrome.storage.sync.get(['paths', 'maxWait', 'useSleep'], (result) => {
@@ -14,12 +19,12 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const maxWait = result.maxWait || 5000;
       const useSleep = result.useSleep || true;
 
-      const urls = paths.map((path) => `https://${domain}${path}`);
+      const urls = paths.map((path) => `${pathToDirbInput.value.replace(/\/+$/, '')}${path}`);
       const requests = urls.map((url) => new XMLHttpRequest());
       
       requests.forEach((request, index) => {
         const path = paths[index];
-        const pageUrl = `${protocol}//${domain}${path}`;
+        const pageUrl = `${pathToDirbInput.value.replace(/\/+$/, '')}${path}`;
       
         request.onreadystatechange = function() {
           if (request.readyState === XMLHttpRequest.DONE) {
